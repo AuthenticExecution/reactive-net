@@ -1,6 +1,6 @@
 from enum import IntEnum
 
-class CommandCode(IntEnum):
+class ReactiveCommand(IntEnum):
     Connect             = 0x0
     Call                = 0x1
     RemoteOutput        = 0x2
@@ -17,7 +17,7 @@ class CommandCode(IntEnum):
         return True
 
 
-class ResultCode(IntEnum):
+class ReactiveResult(IntEnum):
     Ok                  = 0x0
     IllegalCommand      = 0x1
     IllegalPayload      = 0x2
@@ -27,6 +27,6 @@ class ResultCode(IntEnum):
     GenericError        = 0x6
 
 
-class EntrypointId(IntEnum):
+class ReactiveEntrypoint(IntEnum):
     SetKey              = 0x0
     HandleInput         = 0x1

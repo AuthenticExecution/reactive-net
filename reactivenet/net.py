@@ -43,7 +43,7 @@ class ResultMessage():
         return code + self.message.pack()
 
     def ok(self):
-        return code == ResultCode.Ok
+        return code == ReactiveResult.Ok
 
 
     @staticmethod
@@ -53,7 +53,7 @@ class ResultMessage():
         code = struct.unpack('!B', code)[0]
 
         try:
-            code = ResultCode(code)
+            code = ReactiveResult(code)
         except ValueError:
             raise Error("Result code not valid")
 
@@ -116,7 +116,7 @@ class CommandMessage():
         code = struct.unpack('!H', code)[0]
 
         try:
-            code = CommandCode(code)
+            code = ReactiveCommand(code)
         except ValueError:
             raise Error("Command code not valid")
 
