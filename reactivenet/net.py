@@ -1,6 +1,7 @@
 import struct
 import ipaddress
 import asyncio
+import contextlib
 
 from .enums import *
 
@@ -16,6 +17,14 @@ class Message():
         size = struct.pack('!H', self.size)
 
         return size + self.payload
+
+
+    @staticmethod
+    def new(payload=None):
+        if not payload:
+            return Message(0)
+        else:
+            return Message(len(payload), payload)
 
 
     @staticmethod
@@ -102,9 +111,19 @@ class CommandMessage():
     async def send(self):
         reader, writer = await asyncio.open_connection(str(self.ip), self.port)
 
-        writer.write(self.pack())
-        writer.close()
-        await writer.wait_closed()
+        with contextlib.closing(writer):
+            writer.write(self.pack())
+
+
+    async def send_wait(self):
+        if not self.has_response():
+            raise Error("This command has not response: call send() instead")
+
+        reader, writer = await asyncio.open_connection(str(self.ip), self.port)
+
+        with contextlib.closing(writer):
+            writer.write(self.pack())
+            return await ResultMessage.read(reader)
 
 
     @staticmethod

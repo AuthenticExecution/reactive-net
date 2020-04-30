@@ -9,9 +9,9 @@ class ReactiveCommand(IntEnum):
     Output              = 0x5 # called by software modules in SGX and NoSGX
 
     def has_response(self):
-        if self == CommandCode.RemoteOutput:
+        if self == ReactiveCommand.RemoteOutput:
             return False
-        if self == CommandCode.Output:
+        if self == ReactiveCommand.Output:
             return False
 
         return True
