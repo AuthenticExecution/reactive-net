@@ -106,8 +106,6 @@ class CommandMessage():
         writer.close()
         await writer.wait_closed()
 
-        return None
-
 
     @staticmethod
     async def read(reader):
