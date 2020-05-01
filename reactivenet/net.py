@@ -113,6 +113,7 @@ class CommandMessage():
 
         with contextlib.closing(writer):
             writer.write(self.pack())
+            await writer.drain()
 
 
     async def send_wait(self):
@@ -123,6 +124,7 @@ class CommandMessage():
 
         with contextlib.closing(writer):
             writer.write(self.pack())
+            await writer.drain()
             return await ResultMessage.read(reader)
 
 
