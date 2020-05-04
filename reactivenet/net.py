@@ -52,7 +52,7 @@ class ResultMessage():
         return code + self.message.pack()
 
     def ok(self):
-        return code == ReactiveResult.Ok
+        return self.code == ReactiveResult.Ok
 
 
     @staticmethod
