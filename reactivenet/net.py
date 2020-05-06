@@ -30,13 +30,13 @@ class Message():
     @staticmethod
     async def read(reader):
         # read len
-        size = await reader.read(2)
+        size = await reader.readexactly(2)
         size = struct.unpack('!H', size)[0]
 
         # payload
         payload = bytearray()
         if size > 0:
-            payload = await reader.read(size)
+            payload = await reader.readexactly(size)
 
         return Message(size, payload)
 
@@ -58,7 +58,7 @@ class ResultMessage():
     @staticmethod
     async def read(reader):
         # read result code
-        code = await reader.read(1)
+        code = await reader.readexactly(1)
         code = struct.unpack('!B', code)[0]
 
         try:
@@ -131,7 +131,7 @@ class CommandMessage():
     @staticmethod
     async def read(reader):
         # read command code
-        code = await reader.read(2)
+        code = await reader.readexactly(2)
         code = struct.unpack('!H', code)[0]
 
         try:
@@ -146,11 +146,11 @@ class CommandMessage():
 
     @staticmethod
     async def read_with_ip(reader):
-        ip = await reader.read(4)
+        ip = await reader.readexactly(4)
         ip = struct.unpack('!i', ip)[0]
         ip = ipaddress.ip_address(ip)
 
-        port = await reader.read(2)
+        port = await reader.readexactly(2)
         port = struct.unpack('!H', port)[0]
 
         cmd = await CommandMessage.read(reader)
