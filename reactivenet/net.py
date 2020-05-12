@@ -157,3 +157,41 @@ class CommandMessage():
         cmd.set_dest(ip, port)
 
         return cmd
+
+
+class CommandMessageLoad():
+    def __init__(self, payload, ip, port):
+        self.code = ReactiveCommand.Load
+        self.payload = payload
+        self.ip = ip
+        self.port = port
+
+
+    def pack(self):
+        code = struct.pack('!H', self.code)
+
+        return code + self.payload
+
+
+    def has_response(self):
+        return self.code.has_response()
+
+
+    async def send(self):
+        reader, writer = await asyncio.open_connection(str(self.ip), self.port)
+
+        with contextlib.closing(writer):
+            writer.write(self.pack())
+            await writer.drain()
+
+
+    async def send_wait(self):
+        if not self.has_response():
+            raise Error("This command has not response: call send() instead")
+
+        reader, writer = await asyncio.open_connection(str(self.ip), self.port)
+
+        with contextlib.closing(writer):
+            writer.write(self.pack())
+            await writer.drain()
+            return await ResultMessage.read(reader)
