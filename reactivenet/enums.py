@@ -1,5 +1,6 @@
 from enum import IntEnum
 
+# Reactive Command codes
 class ReactiveCommand(IntEnum):
     Connect             = 0x0
     Call                = 0x1
@@ -17,6 +18,7 @@ class ReactiveCommand(IntEnum):
         return True
 
 
+# Reactive Result codes
 class ReactiveResult(IntEnum):
     Ok                  = 0x0
     IllegalCommand      = 0x1
@@ -27,6 +29,7 @@ class ReactiveResult(IntEnum):
     GenericError        = 0x6
 
 
+# Reactive Entrypoint ids
 class ReactiveEntrypoint(IntEnum):
     SetKey              = 0x0
     HandleInput         = 0x1
