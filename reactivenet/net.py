@@ -73,7 +73,7 @@ class ResultMessage():
         return ResultMessage(code, message)
 
 
-# CommandMessage: format <code u16><size u16><payload>
+# CommandMessage: format <code u8><size u16><payload>
 class CommandMessage():
     def __init__(self, code, message, ip=None, port=None):
         self.code = code
@@ -104,7 +104,7 @@ class CommandMessage():
 
     # form the byte array according to the format
     def pack(self):
-        code = struct.pack('!H', self.code)
+        code = struct.pack('!B', self.code)
 
         return code + self.message.pack()
 
@@ -148,8 +148,8 @@ class CommandMessage():
     @staticmethod
     async def read(reader):
         # read command code
-        code = await reader.readexactly(2)
-        code = struct.unpack('!H', code)[0]
+        code = await reader.readexactly(1)
+        code = struct.unpack('!B', code)[0]
 
         try:
             code = ReactiveCommand(code)
@@ -166,7 +166,7 @@ class CommandMessage():
     @staticmethod
     async def read_with_ip(reader):
         ip = await reader.readexactly(4)
-        ip = struct.unpack('!i', ip)[0]
+        ip = struct.unpack('!I', ip)[0]
         ip = ipaddress.ip_address(ip)
 
         port = await reader.readexactly(2)
@@ -190,6 +190,6 @@ class CommandMessageLoad(CommandMessage):
 
     # form the byte array according to the format
     def pack(self):
-        code = struct.pack('!H', self.code)
+        code = struct.pack('!B', self.code)
 
         return code + self.payload
