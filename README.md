@@ -22,7 +22,7 @@ class ReactiveCommand(IntEnum):
     RemoteOutput        = 0x2
     Load                = 0x3
     Ping                = 0x4
-    Output              = 0x5 # called by software modules in SGX and NoSGX
+    Output              = 0x5 # called by software modules in SGX and Native
 ```
 
 - Not all the commands have a response! (ResultMessage)
@@ -40,4 +40,3 @@ class ReactiveResult(IntEnum):
     CryptoError         = 0x5
     GenericError        = 0x6
 ```
-

@@ -8,7 +8,7 @@ class ReactiveCommand(IntEnum):
     Load                = 0x3
     Ping                = 0x4
     RegisterEntrypoint  = 0x5
-    Output              = 0x6 # called by software modules in SGX and NoSGX
+    Output              = 0x6 # called by software modules in SGX and Native
 
     def has_response(self):
         if self == ReactiveCommand.RemoteOutput:
