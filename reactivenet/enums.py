@@ -9,6 +9,7 @@ class ReactiveCommand(IntEnum):
     Ping                = 0x4
     RegisterEntrypoint  = 0x5
     Output              = 0x6 # called by software modules in SGX and Native
+    RemoteRequest       = 0x7
 
     def has_response(self):
         if self == ReactiveCommand.RemoteOutput:
@@ -34,3 +35,4 @@ class ReactiveResult(IntEnum):
 class ReactiveEntrypoint(IntEnum):
     SetKey              = 0x0
     HandleInput         = 0x1
+    HandleHandler       = 0x2
