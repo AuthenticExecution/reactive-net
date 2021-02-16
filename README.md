@@ -22,7 +22,9 @@ class ReactiveCommand(IntEnum):
     RemoteOutput        = 0x2
     Load                = 0x3
     Ping                = 0x4
-    Output              = 0x5 # called by software modules in SGX and Native
+    RegisterEntrypoint  = 0x5
+    Output              = 0x6 # called by software modules in SGX and Native
+    RemoteRequest       = 0x7
 ```
 
 - Not all the commands have a response! (ResultMessage)
