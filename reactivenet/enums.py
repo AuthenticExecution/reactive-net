@@ -28,7 +28,8 @@ class ReactiveResult(IntEnum):
     InternalError       = 0x3
     BadRequest          = 0x4
     CryptoError         = 0x5
-    GenericError        = 0x6
+    NotAttestedYet      = 0x6
+    GenericError        = 0x7
 
 
 # Reactive Entrypoint ids
