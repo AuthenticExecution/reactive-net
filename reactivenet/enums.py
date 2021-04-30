@@ -35,5 +35,6 @@ class ReactiveResult(IntEnum):
 # Reactive Entrypoint ids
 class ReactiveEntrypoint(IntEnum):
     SetKey              = 0x0
-    HandleInput         = 0x1
-    HandleHandler       = 0x2
+    Attest              = 0x1
+    HandleInput         = 0x2
+    HandleHandler       = 0x3
