@@ -34,5 +34,6 @@ class ReactiveResult(IntEnum):
 class ReactiveEntrypoint(IntEnum):
     SetKey = 0x0
     Attest = 0x1
-    HandleInput = 0x2
-    HandleHandler = 0x3
+    Exit = 0x2
+    HandleInput = 0x3
+    HandleHandler = 0x4
