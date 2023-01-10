@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="reactive-net",
-    version="0.3.3",
+    version="0.3.5",
     author="Gianluca Scopelliti",
     author_email="gianlu.1033@gmail.com",
     description="Networking library for reactive-tools",
